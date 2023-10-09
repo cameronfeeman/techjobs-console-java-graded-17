@@ -39,7 +39,7 @@ public class TechJobs {
                 String columnChoice = getUserSelection("List", columnChoices);
 
                 if (columnChoice.equals("all")) {
-                    printJobs(JobData.findAll());
+                    printJobs(JobData.findAll(),"");
                 } else {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
@@ -62,9 +62,9 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    printJobs(JobData.findByValue(searchTerm));
+                    printJobs(JobData.findByValue(searchTerm), searchTerm);
                 } else {
-                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm), searchTerm);
                 }
             }
         }
@@ -118,22 +118,34 @@ public class TechJobs {
     }
 
     // Print a list of jobs
-    private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+    private static void printJobs(ArrayList<HashMap<String, String>> someJobs,String searchTerm) {
         if (someJobs.isEmpty()) {
-            System.out.println("Search term: " + " with No Results" );
-            System.out.println("No Results");
+            if (searchTerm == null || searchTerm.isEmpty()) {
+                System.out.println("No Results");
+            } else {
+                System.out.println("Search term:\n" + searchTerm + " with No Results");
+                System.out.println("No Results");
+            }
         }
 
-        for(HashMap<String,String> job : someJobs) {
-            System.out.println("***** \nposition type: " + job.get("position type"));
-            System.out.println("name: " + job.get("name"));
-            System.out.println("employer: " + job.get("employer"));
-            System.out.println("location: " + job.get("location"));
-            System.out.println("core competency: " + job.get("core competency"));
-            System.out.println("*****\n");
+            for (HashMap<String, String> job : someJobs) {
+                System.out.println("*****");
+
+                for (Map.Entry<String, String> entry : job.entrySet()){
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+
+                    System.out.println(key + ": " + value);
+
+                }
+
+
+                System.out.println("*****\n");
+
+            }
+
 
         }
 
 
     }
-}
