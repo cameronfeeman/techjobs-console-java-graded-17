@@ -71,7 +71,9 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
-                //Change to .UpperCase to make case-insensitive
+
+
+            //Change to .UpperCase to make case-insensitive
             if (aValue.toUpperCase().contains(value)) {
                 jobs.add(row);
             }
@@ -95,13 +97,20 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         //Nested loop
+        //for each row that is a HashMap with key:value in allJobs do the following
         for (HashMap<String, String> row: allJobs)
 
+            //for each key-value pair in the row do the following
             for (Map.Entry <String, String> entry : row.entrySet()) {
+
+                // get key and value and convert to uppercase
                 String key = entry.getKey();
                 String jobValue = entry.getValue().toUpperCase();
 
+                //Check if jobValue is not null
             if (jobValue != null && jobValue.contains(value)) {
+
+                //if not null above add the row to list jobs then exit
                 jobs.add(row);
                 break;
             }
@@ -110,7 +119,7 @@ public class JobData {
 
 
 
-        // TODO - implement this method
+        // implement this method
         return jobs;
     }
 

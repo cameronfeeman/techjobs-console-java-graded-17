@@ -61,6 +61,8 @@ public class TechJobs {
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
 
+
+                //Add .toUpperCase to both of these to get rid of case in-sensitivity
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm.toUpperCase()),searchTerm);
 
@@ -119,23 +121,32 @@ public class TechJobs {
     }
 
     // Print a list of jobs
+    //Method with Two Parameters: Array of HashMaps and Search Term(String)
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs,String searchTerm) {
+        //Checks if array list is empty
         if (someJobs.isEmpty()) {
+            //Check if search term is null or empty
             if (searchTerm == null || searchTerm.isEmpty()) {
+                //if both if statements true print no results
                 System.out.println("No Results");
+                //Prints message listing the users search term and no results if none are found
             } else {
                 System.out.println("Search term:\n" + searchTerm + " with No Results");
                 System.out.println("No Results");
             }
         }
-
+            // Looping through. for each job in the array do the following
             for (HashMap<String, String> job : someJobs) {
                 System.out.println("*****");
 
+                // nested loop. for each key-value pair in the HashMap do the following
                 for (Map.Entry<String, String> entry : job.entrySet()){
+
+                    //pull the key and value pair
                     String key = entry.getKey();
                     String value = entry.getValue();
 
+                    //Print the key and it's value
                     System.out.println(key + ": " + value);
 
                 }
